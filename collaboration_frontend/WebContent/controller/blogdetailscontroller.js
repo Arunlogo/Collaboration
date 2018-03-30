@@ -1,0 +1,146 @@
+/**
+ * 
+ */
+app.controller('Blogdetailscontroller',function($scope,$rootScope,$routeParams,$location,BlogService,$sce){
+	var id=$routeParams.id
+		BlogService.getblog(id).then (function(response){
+			$scope.blog=response.data;
+			$scope.content=$sce.trustAsHtml($scope.blog.blogContent);
+			
+			console.log($scope.blog)
+		},function(response){
+			$rootScope.error=response.data
+			if(response.status==401){
+				$location.path('/login')
+			}
+		})
+	BlogService.hasuserliked(id).then(function(response){
+		console.log(response.data);
+		if(response.data==''){
+			$scope.liked=false
+		}else{
+			$scope.liked=true
+		}
+	},function(response){
+		$rootScope.error=response.data
+		if(response.status==401){
+			$location.path('/login')
+		}
+	
+	})
+	$scope.updatelikes=function(id){
+		BlogService.updatelikes(id).then(function(response){
+			$scope.blog=response.data;
+			$scope.liked=!$scope.liked;
+		},function(response){
+			$rootScope.error=response.data
+			if(response.status==401)
+			{
+				$location.path('/login')
+				}
+		})
+	}
+	BlogService.hasuserdisliked(id).then(function(response){
+		console.log(response.data);
+		if(response.data==''){
+			$scope.disliked=false
+		}else{
+			$scope.disliked=true
+		}
+	},function(response){
+		$rootScope.error=response.data
+		if(response.status==401){
+			$location.path('/login')
+		}
+	
+	})
+	$scope.updatedislikes=function(id){
+		BlogService.updatedislikes(id).then(function(response){
+			$scope.blog=response.data;
+			$scope.disliked=!$scope.disliked;
+		},function(response){
+			$rootScope.error=response.data
+			if(response.status==401)
+			{
+				$location.path('/login')
+				}
+		})
+	}
+	$scope.showRejecttxt=function(){
+		$scope.isRejected=true;
+	}
+	$scope.viewall=function(){
+		$scope.view=!$scope.view;
+		
+	}
+	$scope.blogApproved=function(id){
+		BlogService.blogApproved(id).then(function(response){
+			$location.path('/getblogs')
+		},function(response){
+			$rootScope.error=response.data
+			if(response.status==401)
+			{
+				$location.path('/login')
+				}
+		})
+	}
+	$scope.blogRejected=function(id,rejectionReason){
+		BlogService.blogrejected(id,rejectionReason).then(function(response){
+			$location.path('/getblogs')
+		},function(resposne){
+			$rootScope.error=response.data
+			if(response.status==401)
+			{
+				$location.path('/login')
+				}
+		})
+	}
+	$scope.deleteblog=function(id){
+		BlogService.deleteblog(id).then(function(response){
+			$location.path('/getblogs')
+		},function(response){
+			$rootScope.error=response.data
+			if(response.status==401)
+			{
+				$location.path('/login')
+				}
+		})
+	}
+	$scope.addcomment=function(comment,blog){
+		console.log(comment);
+		console.log(blog);
+		if(comment==null){
+			
+		}else{
+		var blogcomment=new Object()
+		blogcomment.commentTxt=comment;
+		blogcomment.blog=blog;
+		console.log(blogcomment)
+		BlogService.addcomment(blogcomment).then(function(resposne){
+			alert("Successfully added");
+			gettallcomments(id)
+		},function(response){
+			$rootScope.error=response.data
+			if(response.status==401)
+			{
+				$location.path('/login')
+				}
+		})
+		}
+	}
+	function gettallcomments(id){
+		BlogService.gettallcomments(id).then(function(response){
+			$scope.comments=response.data;
+			$scope.commentLength=$scope.comments.length
+			console.log($scope.comments)
+		},function(response){
+			$rootScope.error=response.data
+			if(response.status==401)
+			{
+				$location.path('/login')
+				}
+		})
+		
+	}
+	gettallcomments(id);
+})

@@ -1,0 +1,57 @@
+<!-- <form>
+<pre>
+Enter FirstName:<input type="text" ng-model=user.firstName>
+
+Enter LastName:<input type="text" ng-model=user.lastName>
+
+Enter Email Id:<input type="email" ng-model=user.email disabled>
+
+Enter PhoneNumber:<input type="text" ng-model=user.phoneNumber disabled>
+
+Enter Password:<input type="text" ng-model=user.password>
+ 
+SelectRole:<select ng-model="user.role" value="select" ng-hide="LoggedUserdata.role=='ADMIN'">
+   
+    <option value="Student">Student
+    <option value="Employee">Employee
+    <option value="Alumni">Alumni
+  </select>
+ 
+
+<input type="submit" value="Save" ng-click="editprofile()">
+
+</pre>
+</form> -->
+<div class="adminform" >
+<div class="form-group">
+<b>Enter FirstName:</b><input type="text" name="var"  class="form-control" placeholder="Enter Firstname" ng-model=user.firstName> 
+</div>
+<div class="form-group">
+<b>Enter LastName:</b><input type="text" name="var"  class="form-control" placeholder="Enter LastName" ng-model=user.lastName> 
+</div>
+<div class="form-group">
+<b>Enter  Email Id:</b><input type="text" name="var"  class="form-control" placeholder="Enter  Email Id" ng-model=user.email disabled> 
+</div>
+<div class="form-group">
+<b>Enter PhoneNumber:</b><input type="text" name="var"  class="form-control" placeholder="Enter PhoneNumber" ng-model=user.phoneNumber disabled> 
+</div>
+<div class="form-group">
+<b>Enter Password:</b><input type="text" name="var"  class="form-control" placeholder="Enter Password" ng-model=user.password> 
+</div>
+<div class="form-group" ng-hide="LoggedUserdata.role=='ADMIN'">
+<b>Current Role:{{user.role}}</b>
+<br>
+<br>
+<b>Select Role:</b>
+ <div class="radio" ng-model="user.role" value="select">
+      <label><input type="radio" name="optradio" value="Student">Student</label>
+    </div>
+    <div class="radio" ng-model="user.role">
+      <label><input type="radio" name="optradio" value="Employee">Employee</label>
+    </div>
+    <div class="radio" ng-model="user.role">
+      <label><input type="radio" name="optradio" value="Alumni">Alumni</label>
+    </div>
+</div>
+<input  class="btn btn-default" type="submit" value="Save"  ng-click="editprofile()">
+</div>

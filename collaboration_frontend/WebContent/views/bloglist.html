@@ -1,0 +1,44 @@
+<div ng-show="LoggedUserdata.role=='ADMIN'">
+	<span ng-if="waitingblog.length==0"><b>No Blogs Waiting For
+		Approval</b></span>
+	<div ng-show="!waitingblog.length==0"><h2>List Of Blogs Waiting For Approval</h2></div>
+	<div class="row">
+		<div class="leftcolumn">
+			<div class="card" ng-repeat="blog in waitingblog">
+				<h2>
+					<a href="#/getapprovalform/{{blog.id}}">{{blog.blogTitle}}</a>
+				</h2>
+				<h5>{{blog.postedon |date:'medium'}}</h5>
+				<br> 
+				 <b>Author:</b>{{blog.postedBy.firstName}}&nbsp;{{blog.postedBy.lastName}}
+
+
+
+			</div>
+		</div>
+
+	</div>
+</div>
+<div>
+<h2>List Of Blogs</h2>
+	<div class="row">
+	
+		<div class="leftcolumn">
+		
+			<div class="card" ng-repeat="blog in approvedblog">
+				<h2>
+					<a href="#/getblog/{{blog.id}}">{{blog.blogTitle}}</a>
+				</h2>
+				<h5>{{blog.postedon |date:'medium'}}</h5>
+				<br> 
+				 <b>Author:</b>{{blog.postedBy.firstName}}&nbsp;{{blog.postedBy.lastName}}
+				 <hr>
+
+
+
+			</div>
+		</div>
+
+	</div>
+	</div>
+

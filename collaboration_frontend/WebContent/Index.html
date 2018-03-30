@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/Indexpage.css">
+<link rel="stylesheet" type="text/css" href="css/blogdetails.css">
+
+</head>
+<body ng-app="app">
+
+	<div class="container-fluid">
+		<div class="topnav" ng-show="LoggedUserdata.firstName">
+			<a href="#/home" class="active">Collaboration Portal</a>
+			<div class="dropdown" ng-show="LoggedUserdata.firstName"
+				style="float: right">
+				<button class="dropbtn">
+					<span class="glyphicon glyphicon-user"> <!-- style="font-size:27px;" -->
+					</span>Welcome {{LoggedUserdata.firstName}}
+				</button>
+				<div class="dropdown-content">
+					<a href="#/editprofile" ng-show="LoggedUserdata.firstName">Edit
+						Profile</a> 
+						<a href="#/friendlist">Friends</a>
+						<a href="" ng-click="logout()"
+						ng-show="LoggedUserdata.firstName">Logout</a>
+						
+				</div>
+			</div>
+			<a href="#/register" ng-hide="LoggedUserdata.firstName"
+				class="highlight"><span class="glyphicon glyphicon-user"></span>
+				Sign Up</a>
+
+
+
+			<div class="dropdown" ng-show="LoggedUserdata.role=='ADMIN'">
+				<button class="dropbtn">Admin</button>
+				<div class="dropdown-content">
+					<a href="#/addAdmin">Add Admin</a> <a href="#/getAllAdmin">Get
+						All Admin</a>
+				</div>
+			</div>
+
+			<div class="dropdown" ng-show="LoggedUserdata.firstName">
+				<button class="dropbtn">Jobs</button>
+				<div class="dropdown-content">
+					<a href="#/getalljobs" ng-show="LoggedUserdata.firstName">AvailableJobs</a>
+					<a href="#/addjob" ng-show="LoggedUserdata.role=='ADMIN'">Add
+						Job</a>
+
+				</div>
+			</div>
+			<div class="dropdown" ng-show="LoggedUserdata.firstName">
+				<button class="dropbtn">Blogs</button>
+				<div class="dropdown-content">
+					<a href="#/getblogs" ng-show="LoggedUserdata.firstName"> Blogs</a>
+					<a href="#/addblog" ng-show="LoggedUserdata.firstName">Add Blog</a>
+
+				</div>
+			</div>
+
+			<div class="dropdown" style="float: right"
+				ng-show="LoggedUserdata.firstName" >
+				<div>
+					<a class="dropbtn" href="#/friends"> <span class="glyphicon glyphicon-user"
+						style="font-size: 27px;"><span class=" number-notification"
+							ng-if="friendreqCount>0">{{friendreqCount}}</span></span></a>
+				</div>
+				<!-- <div class="dropdown-content">
+					<a href="#/suggesteduser">SuggestedUsers</a> <a href="#/pendingreq">Friend
+						Request</a> <a href="#/listofFriends">Friends</a>
+				</div> -->
+			</div>
+			<div class="dropdown" ng-show="LoggedUserdata.firstName"
+				style="float: right">
+				<a class="dropbtn"> <span class="glyphicon glyphicon-globe"
+					style="font-size: 27px;"> <span class=" number-notification"
+						ng-if="notificationsCount>0">{{notificationsCount}}</span></span></a>
+				<div class="dropdown-content">
+					<div ng-repeat="n in notifications" style="min-width: 250px">
+						<a href="#/notificationdetails/{{n.id}}">Blog
+							Title:{{n.blogTitle}} approval status is updated</a>
+					</div>
+				</div>
+			</div>
+			<a href=#/chat><span>Chat</span></a>
+			<a href="#profilepic" ng-show="LoggedUserdata.firstName">
+                    <img src="http://localhost:8090/collaboration_middleware/getimage/{{LoggedUserdata.email}}" alt="upload Picture" width="30px" height="30px" class="img-rounded">
+                    </a>
+
+			<a ng-hide="LoggedUserdata.firstName" href="#/login"><span
+				class="glyphicon glyphicon-log-in"></span> Login</a>
+
+
+		</div>
+	</div>
+
+
+
+	<div class="container-fluid text-center">
+		<div class="row content"
+			ng-class="LoggedUserdata.firstName ? 'row content1':'row content2'">
+			<div class="col-sm-2 sidenav">
+				<!--  <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p> -->
+			</div>
+			<div class="col-sm-8 text-left center-content" ng-view>
+				<!-- <div ng-view style="height:250px;"></div> -->
+			</div>
+			<div class="col-sm-2 sidenav">
+				<!-- <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div> -->
+			</div>
+		</div>
+
+	</div>
+
+
+	<footer class="container-fluid text-center"
+		ng-show="LoggedUserdata.firstName">
+		<p>All rights reserved @ Collaboration portal Ltd.</p>
+	</footer>
+
+
+
+
+</body>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.js"></script>
+<script type="text/javascript" src="App/app.js"></script>
+<script type="text/javascript" src="controller/controller.js"></script>
+<script type="text/javascript" src="Service/UserService.js"></script>
+<script type="text/javascript" src="controller/jobcontroller.js"></script>
+<script type="text/javascript" src="Service/JobService.js"></script>
+<script type="text/javascript" src="controller/blogcontroller.js"></script>
+<script type="text/javascript" src="controller/blogdetailscontroller.js"></script>
+<script type="text/javascript" src="Service/BlogService.js"></script>
+<script type="text/javascript" src="Service/notificationservice.js"></script>
+<script type="text/javascript"
+	src="controller/notificationcontroller.js"></script>
+<script type="text/javascript" src="controller/admincontroller.js"></script>
+<script type="text/javascript" src="Service/FriendService.js"></script>
+<script type="text/javascript" src="controller/friendcontroller.js"></script>
+<script type="text/javascript" src="Service/ChatService.js"></script>
+<script type="text/javascript" src="controller/chatcontroller.js"></script>
+<script type="text/javascript" src="App/sockjs/sockjs/sockjs.min.js"></script>
+	<script type="text/javascript" src="App/stomp/stomp/dist/stomp.min.js"></script>
+</html>

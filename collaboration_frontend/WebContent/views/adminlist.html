@@ -1,0 +1,28 @@
+<table class="table">
+<thead>
+<tr>
+<th>FirstName</th>
+<th>LastName</th>
+<th>EmailId</th>
+<th>Role</th>
+<th>PhoneNumber</th>
+
+
+</tr>
+</thead>
+<tbody>
+
+
+<tr ng-repeat="a in admin | filter:searchTxt">
+<td>{{a.firstName}}</td>
+<td>{{a.lastName}}
+</td>
+<td>{{a.email}}</td>
+<td>{{a.role}}</td>
+<td>{{a.phoneNumber}}</td>
+<td><a href="" ng-click="deleteadmin(a.email)"><span class="glyphicon glyphicon-trash"></span></a></td>
+
+
+</tr>
+</tbody>
+</table>

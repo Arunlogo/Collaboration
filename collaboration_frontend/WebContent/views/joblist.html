@@ -1,0 +1,48 @@
+<!-- <h1>Recommended Jobs</h1>
+search:<input type="text" ng-model="searchTxt">
+<table class="table">
+<thead>
+<tr>
+<th>Job Title</th>
+<th>Job Description</th>
+<th>Date</th>
+
+
+</tr>
+</thead>
+<tbody>
+
+
+<tr ng-repeat="job in jobs | filter:searchTxt">
+<td><a href="#/getjob/{{job.id}}">{{job.jobtitle}}</a></td>
+<td>{{job.jobdescription}}
+</td>
+<td>{{job.postedon|date:'medium'}}</td>
+
+
+</tr>
+</tbody>
+</table> -->
+<div>
+<h2>Recommended Jobs</h2>
+search:<input type="text" ng-model="searchTxt">
+	<div class="row">
+	
+		<div class="leftcolumn">
+		
+			<div class="card" ng-repeat="job in jobs | filter:searchTxt">
+				<h2>
+					<a href="#/getjob/{{job.id}}">{{job.jobtitle}}</a>
+									</h2>
+				<h5>{{job.jobdescription}}</h5>
+				<br> 
+				 {{job.postedon|date:'medium'}}
+				 <hr>
+
+
+
+			</div>
+		</div>
+
+	</div>
+	</div>

@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="leftcolumn">
+		<div class="card"">
+			<h2>
+				<a>{{blog.blogTitle}}</a>
+			</h2>
+			<h5>{{blog.postedon |date:'medium'}}</h5>
+			<br> <b>Author:</b>{{blog.postedBy.firstName}}&nbsp;{{blog.postedBy.lastName}}
+			<p ng-bind-html="content"></p>
+		</div>
+	</div>
+</div>
+<div>
+<button type="button" class="btn btn-outline btn-success" ng-click="blogApproved(blog.id)">Accept</button>
+</div>
+<div>
+<button type="button" class="btn btn-outline btn-warning" ng-click="showRejecttxt()">Reject</button>
+</div>
+<div>
+<form ng-show="isRejected">
+<textarea rows="2" cols="10" ng-model="rejectionReason"></textarea>
+<button type="button" class="btn btn-outline btn-warning" ng-click="blogRejected(blog.id,rejectionReason)">Submit</button>
+</form></div>

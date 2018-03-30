@@ -1,0 +1,69 @@
+
+<div class="row">
+	<div class="leftcolumn">
+		<div class="card"">
+			<h2>
+				{{blog.blogTitle}}
+			</h2>
+			<h5>{{blog.postedon |date:'medium'}}</h5>
+			<br> <b>Author:</b>{{blog.postedBy.firstName}}&nbsp;{{blog.postedBy.lastName}}
+			<p ng-bind-html="content"></p>
+			<a href="" ng-click="deleteblog(blog.id)" ng-show="LoggedUserdata.role=='ADMIN'"><span class="glyphicon glyphicon-trash"></span></a>
+			<div><div ng-show="liked" style="padding-bottom:5px">
+				<a class="btn btn-info btn-lg" ng-click="updatelikes(blog.id)" >
+					<span class="glyphicon glyphicon-thumbs-up"
+					style="color: blue; font-size: 20px;"></span> Like
+				</a>
+			</div>
+
+			<div ng-show="!liked" style="padding-bottom:5px">
+				<a class="btn btn-info btn-lg" ng-click="updatelikes(blog.id)">
+					<span class="glyphicon glyphicon-thumbs-up" style="color: black;"></span>
+					Like
+				</a>
+			</div>
+			<div ng-show="disliked">
+				<a class="btn btn-info btn-lg" ng-click="updatedislikes(blog.id)">
+					<span class="glyphicon glyphicon-thumbs-down"
+					style="color: blue; font-size: 20px;"></span> DisLike
+				</a>
+			</div>
+
+			<div ng-show="!disliked">
+				<a class="btn btn-info btn-lg" ng-click="updatedislikes(blog.id)">
+					<span class="glyphicon glyphicon-thumbs-down" style="color: black;"></span>
+					DisLike
+				</a>
+			</div>
+			</div>
+			<br>
+			{{blog.likes}}like(s)
+			{{blog.dislikes}}dislikes
+			{{blog.views}}Views
+		
+
+		</div>
+	</div>
+	<div>
+	<textarea rows="3" cols="9" ng-model="comment"></textarea>
+	<button type="button" class="btn btn-default" ng-click="addcomment(comment,blog)">Add comment</button>
+	</div>
+	<!-- <div ng-repeat="comment in comments">
+	{{comment.commentTxt}}
+	</div> -->
+<a href="" ng-click="viewall()"> view all {{commentLength}}</a>
+	<div class="row" ng-show="view">
+		<div class="leftcolumn">
+			<div class="card" ng-repeat="comment in comments|orderBy:'- postedon'">
+			<b ng-if="LoggedUserdata.firstName==comment.postedby.firstName">Me</b>
+				<h6><b ng-show="LoggedUserdata.firstName!=comment.postedby.firstName">{{comment.postedby.firstName}}</b></h6>
+				{{comment. postedon|date:'medium'}}<br>
+				<p><b>{{comment.commentTxt}}</b></p>
+				<hr>
+			</div>
+		</div>
+
+</div>
+</div>
+
+

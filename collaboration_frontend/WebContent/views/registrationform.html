@@ -1,0 +1,27 @@
+<form enctype="multipart/form-data">
+<pre>
+Enter FirstName:<input type="text" ng-model=user.firstName>
+
+Enter LastName:<input type="text" ng-model=user.lastName>
+
+Enter Email Id:<input type="email" ng-model=user.email required>
+
+Enter PhoneNumber:<input type="text" ng-model=user.phoneNumber>
+Enter Password:<input type="text" ng-model=user.password>
+
+SelectRole:
+ 
+<select ng-model="user.role" value="select">
+   
+    <option value="Student">Student
+    <option value="Employee">Employee
+    <option value="Alumni">Alumni
+  </select>
+ 
+ <input type="file" fileinput="myFile" filepreview="filepreview" id ="myFileField" name="textFile"/>
+ 
+<button ng-click="uploadFile()" >Upload File</button>
+<a><input type="submit" value="Register" ng-click="register()"></a>
+</pre>
+</form>
+ <img ng-src="{{filepreview}}" class="img-responsive" ng-show="filepreview"/> 

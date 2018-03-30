@@ -1,0 +1,35 @@
+<div class="row" ng-hide="friendreq.length==0">
+		<div class="leftcolumn">
+		<h1>Friend Requests</h1>
+		
+			<div class="card" ng-repeat="friendReq in friendreq">
+			<h4><b>{{friendReq.fromId}}</b></h4>
+			<button class="btn btn-success" ng-click="updatereq(friendReq,'A')">Accept</button>
+			<button class="btn btn-danger" ng-click="updatereq(friendReq,'D')">Delete</button>
+			<br>
+			<hr>
+			
+			
+			</div>
+			</div>
+			</div> 
+			<div class="row">
+		<div class="leftcolumn">
+		<h1>Suggested Users</h1>
+		<hr>
+			<div class="card" ng-repeat="user in suggestedusers">
+			<h4><a href="" ng-click=showuser()><b>{{user.email}}</b></a></h4>
+			<div ng-show=show>
+			{{user.firstName}}
+			<br>
+			{{user.lastName}}
+			<br>
+			{{user.phoneNumber}}
+			</div>
+			<br>
+			{{user.firstName}}
+			<button type="button" class="btn btn-default" ng-click="addfriend(user)">Add Friend</button>
+			
+			</div>
+			</div>
+			</div>
